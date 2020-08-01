@@ -77,7 +77,8 @@ There are several interfaces to be implemented for customizing the store.
     
     ```java
     @Bean
-    ConfigurationStoreEventPublisher applicationConfigurationStoreEventPublisher(ApplicationEventPublisher publisher) {
+    ConfigurationStoreEventPublisher applicationConfigurationStoreEventPublisher(
+            ApplicationEventPublisher publisher) {
         return publisher::publishEvent;
     }
     ```
@@ -97,6 +98,12 @@ There are several interfaces to be implemented for customizing the store.
         }
     }
     ```
+    
+## Building
+
+```
+mvn clean install
+```
     
 ## Extending 
 
