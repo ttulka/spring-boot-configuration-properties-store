@@ -6,10 +6,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 @EnableConfigurationProperties(SampleProperties.class)
+@EnableAsync
 public class Application {
 
     public static void main(String[] args) {
@@ -18,7 +20,9 @@ public class Application {
         AppManagement appManagement = ac.getBean(AppManagement.class);
 
         int startupCounter = appManagement.startupCounter();
+
         System.out.println("STARTUP COUNTER: " + startupCounter);
+
         appManagement.updateLastStartup(startupCounter + 1);
     }
 

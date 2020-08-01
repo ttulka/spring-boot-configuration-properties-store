@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.scheduling.annotation.Async;
 
 @Configuration
 public class ConfigurationStoreAutoConfig {
@@ -18,7 +19,7 @@ public class ConfigurationStoreAutoConfig {
             ConfigurationStoreEventPublisher configurationStoreEventPublisher) {
         var conversionService = new ConversionServiceRetriever(applicationContext).getConversionService();
         return (name, value) -> configurationStoreEventPublisher.raise(
-                new ConfigurationPropertyChanged(name, convertedToString(value, conversionService)));
+                    new ConfigurationPropertyChanged(name, convertedToString(value, conversionService)));
     }
 
     @Bean
@@ -39,6 +40,7 @@ public class ConfigurationStoreAutoConfig {
 
             private final ConfigurationStoreEventListener configurationStoreEventListener;
 
+            @Async
             @EventListener
             void handleEvent(ConfigurationPropertyChanged event) {
                 configurationStoreEventListener.onChanged(event.getName(), event.getValue());

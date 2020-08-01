@@ -35,6 +35,12 @@ public class SampleProperties {
 }
 ```
 
+### Asynchronous update
+
+Processing of the property update is done via application events, these are synchronous by default.
+
+You can enable running async mode by annotation one of your configurations with `@EnableAsync`.
+
 ## Settings
 
 - `spring.configstore.source.last` (default: `false`)
