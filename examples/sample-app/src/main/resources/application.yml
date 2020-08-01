@@ -1,0 +1,18 @@
+spring:
+
+  configstore:
+    source:
+      last: false
+    jdbc:
+      schema: my_schema
+      table: my_properties
+
+  datasource:
+    url: jdbc:h2:./testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+#  h2:
+#    console:
+#      enabled: true
