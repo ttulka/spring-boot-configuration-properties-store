@@ -11,7 +11,11 @@ class UpdateConfigurationProperty {
 
     private final @NonNull JdbcTemplate jdbcTemplate;
 
-    public void update(@NonNull String name, @NonNull Object value) {
+    public void update(@NonNull String name, Object value) {
+        if (value == null) {
+            deleteProperty(name);
+            return;
+        }
         if (hasProperty(name)) {
             updateProperty(name, value);
         } else {
@@ -27,6 +31,11 @@ class UpdateConfigurationProperty {
     private void updateProperty(String name, Object value) {
         jdbcTemplate.update("UPDATE " + new SqlIdentifier(table) + " SET value = ? WHERE name = ?",
                 asString(value), name);
+    }
+
+    private void deleteProperty(String name) {
+        jdbcTemplate.update("DELETE FROM " + new SqlIdentifier(table) + " WHERE name = ?",
+                name);
     }
 
     private boolean hasProperty(String name) {

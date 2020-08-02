@@ -94,12 +94,12 @@ There are several interfaces to be implemented for customizing the store.
     ```java
     @Component
     @RequiredArgsConstructor
-    class ConfigurationPropertyChangedEventListener {
+    class ConfigurationPropertyUpdatedEventListener {
 
         private final ConfigurationStoreEventListener configurationStoreEventListener;
 
         @EventListener
-        void handleEvent(ConfigurationPropertyChanged event) {
+        void handleEvent(ConfigurationPropertyUpdated event) {
             configurationStoreEventListener.on(event);
         }
     }

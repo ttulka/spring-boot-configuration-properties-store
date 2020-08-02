@@ -8,8 +8,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.scheduling.annotation.Async;
 
+/**
+ * Base configuration of Configuration Store.
+ *
+ * Sets up a default event-based {@link ConfigurationStore}
+ * and application-events-based {@link ConfigurationStoreEventPublisher}.
+ *
+ * Searchs for beans of type {@link Converter} to convert configuration properties into String.
+ */
 @Configuration
 public class ConfigurationStoreAutoConfig {
 
@@ -19,7 +28,7 @@ public class ConfigurationStoreAutoConfig {
             ConfigurationStoreEventPublisher configurationStoreEventPublisher) {
         var conversionService = new ConversionServiceRetriever(applicationContext).getConversionService();
         return (name, value) -> configurationStoreEventPublisher.raise(
-                    new ConfigurationPropertyChanged(name, convertedToString(value, conversionService)));
+                    new ConfigurationPropertyUpdated(name, convertedToString(value, conversionService)));
     }
 
     @Bean
@@ -28,22 +37,22 @@ public class ConfigurationStoreAutoConfig {
     }
 
     @Configuration
-    static class ConfigurationPropertyChangedEventListenerConfig {
+    static class ConfigurationPropertyUpdatedEventListenerConfig {
 
         @Bean
-        ConfigurationPropertyChangedEventListener configurationPropertyChangedEventListener(ConfigurationStoreEventListener configurationStoreEventListener) {
-            return new ConfigurationPropertyChangedEventListener(configurationStoreEventListener);
+        ConfigurationPropertyUpdatedEventListener configurationPropertyUpdatedEventListener(ConfigurationStoreEventListener configurationStoreEventListener) {
+            return new ConfigurationPropertyUpdatedEventListener(configurationStoreEventListener);
         }
 
         @RequiredArgsConstructor
-        static class ConfigurationPropertyChangedEventListener {
+        static class ConfigurationPropertyUpdatedEventListener {
 
             private final ConfigurationStoreEventListener configurationStoreEventListener;
 
             @Async
             @EventListener
-            void handleEvent(ConfigurationPropertyChanged event) {
-                configurationStoreEventListener.onChanged(event.getName(), event.getValue());
+            void handleEvent(ConfigurationPropertyUpdated event) {
+                configurationStoreEventListener.onUpdated(event.getName(), event.getValue());
             }
         }
 
