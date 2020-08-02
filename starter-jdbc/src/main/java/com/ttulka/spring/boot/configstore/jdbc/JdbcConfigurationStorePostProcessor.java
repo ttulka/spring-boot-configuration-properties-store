@@ -16,14 +16,15 @@ import javax.sql.DataSource;
 
 class JdbcConfigurationStorePostProcessor implements EnvironmentPostProcessor, Ordered {
 
+    static final String PROPERTY_SOURCE_NAME = "propertiesFromJdbcConfigurationStore";
+
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment env, SpringApplication application) {
         if (env.getProperty("spring.configstore.jdbc.enabled", "true").equalsIgnoreCase("false")) {
             return;
         }
         try {
-            DataSource dataSource = DataSourceBuilder
-                    .create()
+            DataSource dataSource = DataSourceBuilder.create()
                     .url(env.getProperty("spring.datasource.url"))
                     .username(env.getProperty("spring.datasource.username"))
                     .password(env.getProperty("spring.datasource.password"))
@@ -35,7 +36,7 @@ class JdbcConfigurationStorePostProcessor implements EnvironmentPostProcessor, O
             String tableName = StringUtils.hasLength(schema) ? schema + "." + table : table;
 
             var newSource = new MapPropertySource(
-                    "propertiesFromJdbcConfigurationStore",
+                    PROPERTY_SOURCE_NAME,
                     new FindConfigurationProperties(tableName, new JdbcTemplate(dataSource)).all());
 
             if (env.getProperty("spring.configstore.source.last", "false").equalsIgnoreCase("TRUE")) {

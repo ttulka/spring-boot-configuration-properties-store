@@ -14,6 +14,21 @@ Mutable persistent configuration properties that survive an application restart.
 </dependency>
 ```
 
+### Application setting
+
+The application environment must contain data source configuration properties.
+
+For example in `application.yml`: 
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:h2:./mydb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+```
+
 ### Update a configuration property
 
 ```java
@@ -35,7 +50,7 @@ public class SampleProperties {
 }
 ```
 
-### Asynchronous update
+#### Asynchronous update
 
 Processing of the property update is done via application events, these are synchronous by default.
 
