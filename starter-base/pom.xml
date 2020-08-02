@@ -11,6 +11,8 @@
     </parent>
     <artifactId>configuration-properties-store-spring-boot-starter-base</artifactId>
 
+    <name>starter-base</name>
+
     <dependencies>
         <dependency>
             <groupId>com.ttulka.spring.boot.configstore</groupId>

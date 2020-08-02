@@ -11,6 +11,8 @@
     </parent>
     <artifactId>configuration-properties-store-jdbc-spring-boot-starter</artifactId>
 
+    <name>starter-jdbc</name>
+
     <dependencies>
         <dependency>
             <groupId>com.ttulka.spring.boot.configstore</groupId>

@@ -11,6 +11,8 @@
     </parent>
     <artifactId>configuration-properties-store-api</artifactId>
 
+    <name>api</name>
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
