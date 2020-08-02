@@ -74,7 +74,7 @@ You can enable running async mode by annotation one of your configurations with 
   
 ### Custom converters
 
-As well as for configuration properties, custom converters can be added. To each custom converter there must be an inverted controller:
+As well as for configuration properties, custom converters can be added. To each custom converter there must be an inverted converter:
 
 ```java
 @Component
@@ -97,6 +97,19 @@ class EmployeeInvertedConverter implements Converter<Employee, String> {
         return from.firstName() + "," + from.lastName();
     }
 }
+```
+
+Then, the class could be used in configuration properties as well as in configuration store:
+
+```java
+@ConfigurationProperties
+public class SampleProperties {
+
+    private Employee employee;
+    ...
+}
+...
+configStore.update("employee", new Employee("Homer", "Simpson"));
 ```
   
 ## Customizing
