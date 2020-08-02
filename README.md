@@ -72,6 +72,33 @@ You can enable running async mode by annotation one of your configurations with 
   - When a schema set will result into `<schema>.<table>`.
   - String value.
   
+### Custom converters
+
+As well as for configuration properties, custom converters can be added. To each custom converter there must be an inverted controller:
+
+```java
+@Component
+@ConfigurationPropertiesBinding
+class EmployeeConverter implements Converter<String, Employee> {
+ 
+    @Override
+    public Employee convert(String from) {
+        String[] data = from.split(",");
+        return new Employee(data[0], Double.parseDouble(data[1]));
+    }
+}
+
+@Component
+@ConfigurationPropertiesBinding
+class EmployeeInvertedConverter implements Converter<Employee, String> {
+ 
+    @Override
+    public String convert(Employee from) {
+        return from.firstName() + "," + from.lastName();
+    }
+}
+```
+  
 ## Customizing
 
 There are several interfaces to be implemented for customizing the store.
