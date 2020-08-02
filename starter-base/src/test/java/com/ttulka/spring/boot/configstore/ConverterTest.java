@@ -19,7 +19,7 @@ class ConverterTest {
     private ConfigurableApplicationContext applicationContext;
 
     @Test
-    void custom_convertor_is_added() {
+    void custom_converter_is_added() {
         var conversionService = new ConversionServiceRetriever(applicationContext).getConversionService();
 
         assertThat(conversionService.canConvert(MyObject.class, String.class)).isTrue();
