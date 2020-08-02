@@ -18,8 +18,8 @@
 
     <modules>
         <module>api</module>
-        <module>jdbc-store</module>
         <module>starter-base</module>
+        <module>jdbc-store</module>
         <module>starter-jdbc</module>
     </modules>
 

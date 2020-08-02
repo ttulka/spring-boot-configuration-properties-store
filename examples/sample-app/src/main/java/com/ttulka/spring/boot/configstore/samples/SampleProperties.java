@@ -14,4 +14,6 @@ public class SampleProperties {
     public static final String PREFIX = "my.app";
 
     private int startupCounter;
+
+    private MyDateTime startupTime;
 }
