@@ -4,14 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import static com.ttulka.spring.boot.configstore.samples.SampleProperties.PREFIX;
-
-@ConfigurationProperties(PREFIX)
+@ConfigurationProperties("my.app")
 @Getter
 @Setter
 public class SampleProperties {
-
-    public static final String PREFIX = "my.app";
 
     private int startupCounter;
 

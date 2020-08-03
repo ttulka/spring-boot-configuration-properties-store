@@ -58,6 +58,9 @@ You can enable running async mode by annotation one of your configurations with 
 
 ## Settings
 
+- `spring.configstore.prefix` (default: `null`) 
+  - Prefix added to a property name: `<prefix>.<propName>`.
+  - When `null`, no prefix is added.
 - `spring.configstore.source.last` (default: `false`)
   - The property source is added as last, otherwise as first. 
 - `spring.configstore.jdbc.enabled` (default: `true`)
@@ -118,20 +121,15 @@ There are several interfaces to be implemented for customizing the store.
 
 - `ConfigurationPropertiesStore`
   - The default implementation publishes an event.
-  - The entry point, could be extended via a decorator:
+  - The entry point, should be autowired in the application.
   
       ```java
-      @RequiredArgsConstructor
-      class MyAppConfigurationStore implements ConfigurationPropertiesStore {
-  
-          private final ConfigurationStore configStore;
-  
-          @Override
-          public void update(String propName, Object propValue) {
-              configStore.update("my.app." + propName, propValue);
-          }
-      }
+      @Autowired
+      ConfigurationStore configStore;
+    
+      configStore.update("my-prop", 123);
       ```
+    
 - `ConfigurationStoreEventPublisher`
   - The default implementation uses Spring's `ApplicationEventPublisher`.
   - Could be extended together with an event handling that calls `ConfigurationStoreEventListener`:

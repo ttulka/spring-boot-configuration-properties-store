@@ -31,7 +31,7 @@ public class Application {
     static class AppManagement {
 
         private final SampleProperties sampleProperties;
-        private final MyAppConfigurationStore configStore;
+        private final ConfigurationStore configStore;
 
         void doSomethingWithConfigurationProperties() {
             int startupCounter = sampleProperties.getStartupCounter();
@@ -41,21 +41,6 @@ public class Application {
 
             configStore.update("startup-counter", startupCounter + 1);
             configStore.update("startup-time", new MyDateTime(LocalDateTime.now()));
-        }
-    }
-
-    /**
-     * Application decorator for ConfigurationStore
-     */
-    @Component
-    @RequiredArgsConstructor
-    static class MyAppConfigurationStore implements ConfigurationStore {
-
-        private final ConfigurationStore configStore;
-
-        @Override
-        public void update(String propName, Object propValue) {
-            configStore.update(SampleProperties.PREFIX + "." + propName, propValue);
         }
     }
 

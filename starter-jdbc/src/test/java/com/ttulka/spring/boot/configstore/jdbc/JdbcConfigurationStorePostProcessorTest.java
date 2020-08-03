@@ -11,7 +11,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.ContextConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -26,7 +25,6 @@ class JdbcConfigurationStorePostProcessorTest {
             "spring.datasource.password=",
             "spring.configstore.jdbc.schema=testschema",
             "spring.configstore.jdbc.table=testtable"})
-    @ContextConfiguration(classes = JdbcConfigurationStorePostProcessorTest.class)
     class JdbcStoreEnabledTest {
 
         private static final String PROP1 = "my.property1";
@@ -96,7 +94,6 @@ class JdbcConfigurationStorePostProcessorTest {
             "spring.datasource.password=",
             "spring.configstore.jdbc.schema=testschema",
             "spring.configstore.jdbc.table=testtable"})
-    @ContextConfiguration(classes = JdbcConfigurationStorePostProcessorTest.class)
     class JdbcStoreLastTest {
 
         @Autowired

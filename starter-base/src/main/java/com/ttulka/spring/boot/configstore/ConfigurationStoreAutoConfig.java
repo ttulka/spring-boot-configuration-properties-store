@@ -2,6 +2,7 @@ package com.ttulka.spring.boot.configstore;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConversionServiceRetriever;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.util.StringUtils;
 
 /**
  * Base configuration of Configuration Store.
@@ -19,16 +21,20 @@ import org.springframework.scheduling.annotation.Async;
  *
  * Searchs for beans of type {@link Converter} to convert configuration properties into String.
  */
+@EnableConfigurationProperties(ConfigurationStoreProperties.class)
 @Configuration
 public class ConfigurationStoreAutoConfig {
 
     @Bean
     ConfigurationStore eventBasedConfigurationPropertiesStore(
+            ConfigurationStoreProperties properties,
             ConfigurableApplicationContext applicationContext,
             ConfigurationStoreEventPublisher configurationStoreEventPublisher) {
+        var prefix = properties.getPrefix();
         var conversionService = new ConversionServiceRetriever(applicationContext).getConversionService();
-        return (name, value) -> configurationStoreEventPublisher.raise(
-                    new ConfigurationPropertyUpdated(name, convertedToString(value, conversionService)));
+        return (name, value) -> configurationStoreEventPublisher.raise(new ConfigurationPropertyUpdated(
+                StringUtils.hasLength(prefix) ? prefix + "." + name : name,
+                convertedToString(value, conversionService)));
     }
 
     @Bean

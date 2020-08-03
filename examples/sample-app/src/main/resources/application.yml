@@ -1,6 +1,7 @@
 spring:
 
   configstore:
+    prefix: my.app
     source:
       last: false
     jdbc:

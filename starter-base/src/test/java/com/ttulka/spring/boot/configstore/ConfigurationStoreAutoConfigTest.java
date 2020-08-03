@@ -17,14 +17,14 @@ class ConfigurationStoreAutoConfigTest {
 
     @Test
     void eventBasedConfigurationPropertiesStore_exists() {
-        this.contextRunner.run(context -> {
+        contextRunner.run(context -> {
             assertThat(context).hasSingleBean(ConfigurationStore.class);
         });
     }
 
     @Test
     void applicationConfigurationStoreEventPublisher_exists() {
-        this.contextRunner.run(context -> {
+        contextRunner.run(context -> {
             assertThat(context).hasSingleBean(ConfigurationStoreEventPublisher.class);
         });
     }
