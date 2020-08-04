@@ -2,6 +2,8 @@
 
 Mutable persistent configuration properties that survive an application restart.
 
+Extendable store types. JDBC store as default. 
+
 ## Usage
 
 ### Maven dependency
