@@ -4,15 +4,26 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.regex.Pattern;
 
+/**
+ * SQL identifier for a schema or table name.
+ */
 @RequiredArgsConstructor
 class SqlIdentifier {
 
     private final String identifier;
 
+    /**
+     * Checks the identifier for emptiness.
+     * @return true if the identifier is empty, otherwise false
+     */
     public boolean isEmpty() {
         return identifier == null || identifier.isBlank();
     }
 
+    /**
+     * Returns the identifier as String.
+     * @return the identifier as String
+     */
     @Override
     public String toString() {
         var identifier = this.identifier.strip();

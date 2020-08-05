@@ -8,6 +8,9 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
 
+/**
+ * Finding configuration properties from a JDBC source.
+ */
 @RequiredArgsConstructor
 class FindConfigurationProperties {
 
@@ -15,6 +18,10 @@ class FindConfigurationProperties {
 
     private final JdbcTemplate jdbcTemplate;
 
+    /**
+     * Finds all configuration properties.
+     * @return a map of configuration properties.
+     */
     public Map<String, Object> all() {
         return jdbcTemplate.queryForList(
                 "SELECT name, value  FROM " + new SqlIdentifier(table)).stream()

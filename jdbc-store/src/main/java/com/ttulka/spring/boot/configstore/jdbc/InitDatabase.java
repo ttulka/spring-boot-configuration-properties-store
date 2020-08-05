@@ -4,6 +4,9 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+ * Initialization of the database schema.
+ */
 @RequiredArgsConstructor
 class InitDatabase {
 
@@ -12,6 +15,9 @@ class InitDatabase {
 
     private final @NonNull JdbcTemplate jdbcTemplate;
 
+    /**
+     * Creates database structures for JDBC store.
+     */
     public void createStructures() {
         SqlIdentifier schemaName = new SqlIdentifier(schema);
         SqlIdentifier tableName = new SqlIdentifier(table);

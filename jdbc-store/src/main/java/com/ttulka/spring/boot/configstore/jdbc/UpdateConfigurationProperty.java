@@ -4,6 +4,9 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+ * Updating of a configuration property.
+ */
 @RequiredArgsConstructor
 class UpdateConfigurationProperty {
 
@@ -11,6 +14,11 @@ class UpdateConfigurationProperty {
 
     private final @NonNull JdbcTemplate jdbcTemplate;
 
+    /**
+     * Updates a configuration property.
+     * @param name the property name
+     * @param value the property value
+     */
     public void update(@NonNull String name, Object value) {
         if (value == null) {
             deleteProperty(name);

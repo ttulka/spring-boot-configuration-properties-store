@@ -16,6 +16,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
+/**
+ * Autoconfiguration for JDBC Store.
+ *
+ * Configures the JDBC {@link ConfigurationStoreEventListener}.
+ *
+ * Configures a {@link JdbcTemplate} when not defined yet.
+ */
 @ConditionalOnProperty(prefix = "spring.configstore.jdbc", name = "enabled", havingValue = "true", matchIfMissing = true)
 @ConditionalOnBean(DataSource.class)
 @AutoConfigureAfter({JdbcTemplateAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class})

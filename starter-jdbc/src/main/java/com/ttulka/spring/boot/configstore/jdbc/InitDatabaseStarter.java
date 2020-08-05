@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Starter for database initialization.
+ */
 @Component
 class InitDatabaseStarter {
 

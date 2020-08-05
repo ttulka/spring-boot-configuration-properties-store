@@ -14,6 +14,11 @@ import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 
+/**
+ * The post-processor for loading configuration properties from a JDBC source.
+ *
+ * Expected a Spring configuration properties (spring.datasource) for a data source in environment.
+ */
 class JdbcConfigurationStorePostProcessor implements EnvironmentPostProcessor, Ordered {
 
     static final String PROPERTY_SOURCE_NAME = "propertiesFromJdbcConfigurationStore";
