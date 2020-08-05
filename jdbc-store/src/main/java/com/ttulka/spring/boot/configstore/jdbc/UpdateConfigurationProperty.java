@@ -19,7 +19,7 @@ class UpdateConfigurationProperty {
      * @param name the property name
      * @param value the property value
      */
-    public void update(@NonNull String name, Object value) {
+    public void update(@NonNull String name, String value) {
         if (value == null) {
             deleteProperty(name);
             return;
@@ -31,14 +31,14 @@ class UpdateConfigurationProperty {
         }
     }
 
-    private void insertProperty(String name, Object value) {
+    private void insertProperty(String name, String value) {
         jdbcTemplate.update("INSERT INTO " + new SqlIdentifier(table) + " VALUES(?, ?)",
-                name, asString(value));
+                name, value);
     }
 
-    private void updateProperty(String name, Object value) {
+    private void updateProperty(String name, String value) {
         jdbcTemplate.update("UPDATE " + new SqlIdentifier(table) + " SET value = ? WHERE name = ?",
-                asString(value), name);
+                value, name);
     }
 
     private void deleteProperty(String name) {
@@ -49,9 +49,5 @@ class UpdateConfigurationProperty {
     private boolean hasProperty(String name) {
         return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM " + new SqlIdentifier(table) + " WHERE name = ?",
                 Integer.class, name) > 0;
-    }
-
-    private String asString(Object o) {
-        return o != null ? o.toString() : null;
     }
 }
