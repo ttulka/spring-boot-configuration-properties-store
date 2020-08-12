@@ -29,7 +29,7 @@ import javax.sql.DataSource;
 @EnableConfigurationProperties(JdbcConfigStoreConfigurationProperties.class)
 @Import(ConfigurationStoreAutoConfig.class)
 @Configuration
-class JdbcConfigurationStoreAutoConfig {
+public class JdbcConfigurationStoreAutoConfig {
 
     @Bean
     ConfigurationStoreEventListener jdbcConfigurationStoreEventListener(

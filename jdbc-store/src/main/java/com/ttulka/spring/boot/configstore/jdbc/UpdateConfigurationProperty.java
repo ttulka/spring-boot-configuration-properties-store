@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * Updating of a configuration property.
  */
 @RequiredArgsConstructor
-class UpdateConfigurationProperty {
+public class UpdateConfigurationProperty {
 
     private final @NonNull String table;
 

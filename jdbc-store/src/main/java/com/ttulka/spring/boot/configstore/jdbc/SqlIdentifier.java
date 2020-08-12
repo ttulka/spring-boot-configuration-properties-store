@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * SQL identifier for a schema or table name.
  */
 @RequiredArgsConstructor
-class SqlIdentifier {
+public class SqlIdentifier {
 
     private final String identifier;
 

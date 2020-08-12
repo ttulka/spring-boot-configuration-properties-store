@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toMap;
  * Finding configuration properties from a JDBC source.
  */
 @RequiredArgsConstructor
-class FindConfigurationProperties {
+public class FindConfigurationProperties {
 
     private final @NonNull String table;
 
