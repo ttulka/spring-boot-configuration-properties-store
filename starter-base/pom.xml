@@ -11,7 +11,9 @@
     </parent>
     <artifactId>configuration-properties-store-spring-boot-starter-base</artifactId>
 
-    <name>starter-base</name>
+    <name>Configuration Properties Store for Spring Boot - Starter Parent</name>
+    <description>Mutable persistent configuration properties that survive an application restart.</description>
+    <url>https://github.com/ttulka/spring-boot-configuration-properties-store</url>
 
     <dependencies>
         <dependency>

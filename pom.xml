@@ -9,7 +9,9 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>parent</name>
+    <name>Configuration Properties Store for Spring Boot - Parent</name>
+    <description>Mutable persistent configuration properties that survive an application restart.</description>
+    <url>https://github.com/ttulka/spring-boot-configuration-properties-store</url>
 
     <properties>
         <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
