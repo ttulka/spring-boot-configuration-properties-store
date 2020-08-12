@@ -46,7 +46,7 @@ public class Application {
 
     @Component
     @ConfigurationPropertiesBinding
-    class EmployeeConverter implements Converter<String, MyDateTime> {
+    class MyDateTimeConverter implements Converter<String, MyDateTime> {
 
         @Override
         public MyDateTime convert(String from) {
@@ -56,7 +56,7 @@ public class Application {
 
     @Component
     @ConfigurationPropertiesBinding
-    class EmployeeInvertedConverter implements Converter<MyDateTime, String> {
+    class MyDateTimeInvertedConverter implements Converter<MyDateTime, String> {
 
         @Override
         public String convert(MyDateTime from) {
