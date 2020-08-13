@@ -175,4 +175,4 @@ So far there is the following implementation:
 
 Then implementing a new extension, at least `ConfigurationStoreEventListener` must be implemented.
 
-Next, a new implementation of `EnvironmentPostProcessor` is needed to load properties into the environment. 
+Next, a new implementation of `ConfigurationStorePostProcessor` is needed to load properties into the environment. 

@@ -9,7 +9,6 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,18 +38,18 @@ class JdbcConfigurationStorePostProcessorTest {
 
         @Test
         void post_processing_loads_a_new_source_into_environment() {
-            new JdbcConfigurationStorePostProcessor().postProcessEnvironment(env, app);
+            var postProcessor = new JdbcConfigurationStorePostProcessor();
+            postProcessor.postProcessEnvironment(env, app);
 
-            assertThat(env.getPropertySources().contains(
-                    JdbcConfigurationStorePostProcessor.PROPERTY_SOURCE_NAME)).isTrue();
+            assertThat(env.getPropertySources().contains(postProcessor.propertySourceName())).isTrue();
         }
 
         @Test
         void new_source_contains_properties() {
-            new JdbcConfigurationStorePostProcessor().postProcessEnvironment(env, app);
+            var postProcessor = new JdbcConfigurationStorePostProcessor();
+            postProcessor.postProcessEnvironment(env, app);
 
-            var source = env.getPropertySources()
-                    .get(JdbcConfigurationStorePostProcessor.PROPERTY_SOURCE_NAME);
+            var source = env.getPropertySources().get(postProcessor.propertySourceName());
 
             assertAll(
                     () -> assertThat(source.containsProperty(PROP1)).isTrue(),
@@ -58,14 +57,6 @@ class JdbcConfigurationStorePostProcessorTest {
                     () -> assertThat(source.getProperty(PROP1)).isEqualTo(VALUE1),
                     () -> assertThat(source.getProperty(PROP2)).isEqualTo(VALUE2)
             );
-        }
-
-        @Test
-        void new_source_is_added_as_first() {
-            new JdbcConfigurationStorePostProcessor().postProcessEnvironment(env, app);
-
-            assertThat(env.getPropertySources().iterator().next().getName()).isEqualTo(
-                    JdbcConfigurationStorePostProcessor.PROPERTY_SOURCE_NAME);
         }
 
         @BeforeEach
@@ -87,14 +78,15 @@ class JdbcConfigurationStorePostProcessorTest {
 
     @Nested
     @SpringBootTest(classes = JdbcConfigurationStorePostProcessorTest.class, properties = {
-            "spring.configstore.source.last=true",
+            "spring.configstore.jdbc.enabled=false",
             "spring.datasource.url=jdbc:h2:mem:testdb",
             "spring.datasource.driverClassName=org.h2.Driver",
             "spring.datasource.username=sa",
-            "spring.datasource.password=",
-            "spring.configstore.jdbc.schema=testschema",
-            "spring.configstore.jdbc.table=testtable"})
-    class JdbcStoreLastTest {
+            "spring.datasource.password="})
+    class JdbcStoreDisabledTest {
+
+        private static final String PROP1 = "my.property1";
+        private static final String VALUE1 = "value1";
 
         @Autowired
         private ConfigurableEnvironment env;
@@ -102,17 +94,11 @@ class JdbcConfigurationStorePostProcessorTest {
         private SpringApplication app;
 
         @Test
-        void new_source_is_added_as_last() {
-            new JdbcConfigurationStorePostProcessor().postProcessEnvironment(env, app);
+        void property_source_is_empty() {
+            var postProcessor = new JdbcConfigurationStorePostProcessor();
+            postProcessor.postProcessEnvironment(env, app);
 
-            var it = env.getPropertySources().iterator();
-            PropertySource<?> source = it.next();
-            while (it.hasNext()) {
-                source = it.next();
-            }
-
-            assertThat(source.getName()).isEqualTo(
-                    JdbcConfigurationStorePostProcessor.PROPERTY_SOURCE_NAME);
+            assertThat(env.getPropertySources().get(postProcessor.propertySourceName()).getProperty(PROP1)).isNull();
         }
 
         @BeforeEach
@@ -125,22 +111,9 @@ class JdbcConfigurationStorePostProcessorTest {
                     .build());
             new InitDatabase("testschema", "testtable", jdbTemplate)
                     .createStructures();
-        }
-    }
 
-    @Nested
-    @SpringBootTest(classes = JdbcConfigurationStorePostProcessorTest.class,
-            properties = {"spring.configstore.jdbc.enabled=false"})
-    class JdbcStoreDisabledTest {
-
-        @Autowired
-        private ConfigurableEnvironment env;
-        @MockBean
-        private SpringApplication app;
-
-        @Test
-        void post_processing_does_nothing() {
-            new JdbcConfigurationStorePostProcessor().postProcessEnvironment(env, app);
+            var update = new UpdateConfigurationProperty("testschema.testtable", jdbTemplate);
+            update.update(PROP1, VALUE1);
         }
     }
 
