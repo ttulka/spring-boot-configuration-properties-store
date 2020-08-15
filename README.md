@@ -12,7 +12,7 @@ Extendable store types. JDBC store as default.
 <dependency>
     <groupId>com.ttulka.spring.boot.configstore</groupId>
     <artifactId>configuration-properties-store-jdbc-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -63,8 +63,10 @@ You can enable running async mode by annotation one of your configurations with 
 - `spring.configstore.prefix` (default: `null`) 
   - Prefix added to a property name: `<prefix>.<propName>`.
   - When `null`, no prefix is added.
+  - String value.
 - `spring.configstore.source.last` (default: `false`)
   - The property source is added as last, otherwise as first. 
+  - Boolean value.
 - `spring.configstore.jdbc.enabled` (default: `true`)
   - JDBC-based store is enabled/disabled.
   - Boolean value. 
