@@ -35,7 +35,7 @@ spring:
 
 ```java
 @Autowired
-ConfigurationPropertiesStore configStore;
+ConfigurationStore configStore;
 ...
 configStore.update("my-property", "value123");
 ```
