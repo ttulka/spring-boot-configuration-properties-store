@@ -3,11 +3,13 @@ package com.ttulka.spring.boot.configstore.jdbc;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Updating of a configuration property.
  */
 @RequiredArgsConstructor
+@Transactional
 public class UpdateConfigurationProperty {
 
     private final @NonNull String table;
