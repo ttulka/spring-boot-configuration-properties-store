@@ -53,7 +53,7 @@ class JdbcConfigurationStorePostProcessorTest {
 
             assertAll(
                     () -> assertThat(source.containsProperty(PROP1)).isTrue(),
-                    () -> assertThat(source.containsProperty(PROP1)).isTrue(),
+                    () -> assertThat(source.containsProperty(PROP2)).isTrue(),
                     () -> assertThat(source.getProperty(PROP1)).isEqualTo(VALUE1),
                     () -> assertThat(source.getProperty(PROP2)).isEqualTo(VALUE2)
             );
