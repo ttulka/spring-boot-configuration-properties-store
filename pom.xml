@@ -6,7 +6,7 @@
 
     <groupId>com.ttulka.spring.boot.configstore</groupId>
     <artifactId>configuration-properties-store-parent</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Configuration Properties Store for Spring Boot - Parent</name>
@@ -14,7 +14,7 @@
     <url>https://github.com/ttulka/spring-boot-configuration-properties-store</url>
 
     <properties>
-        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
+        <spring.boot.version>2.3.5.RELEASE</spring.boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
