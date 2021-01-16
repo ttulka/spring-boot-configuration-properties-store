@@ -12,7 +12,7 @@ Extendable store types. JDBC store as default.
 <dependency>
     <groupId>com.ttulka.spring.boot.configstore</groupId>
     <artifactId>configuration-properties-store-jdbc-spring-boot-starter</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
 </dependency>
 ```
 
