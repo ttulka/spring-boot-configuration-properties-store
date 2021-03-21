@@ -6,7 +6,7 @@
 
     <groupId>com.ttulka.spring.boot.configstore</groupId>
     <artifactId>configuration-properties-store-parent</artifactId>
-    <version>1.2.4</version>
+    <version>1.2.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Configuration Properties Store for Spring Boot - Parent</name>
