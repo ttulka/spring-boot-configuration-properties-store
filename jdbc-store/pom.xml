@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.ttulka.spring.boot.configstore</groupId>
         <artifactId>configuration-properties-store-parent</artifactId>
-        <version>1.2.5-SNAPSHOT</version>
+        <version>1.2.6-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>configuration-properties-store-jdbc</artifactId>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.ttulka.spring.boot.configstore</groupId>
             <artifactId>configuration-properties-store-api</artifactId>
-            <version>1.2.5-SNAPSHOT</version>
+            <version>1.2.6-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
