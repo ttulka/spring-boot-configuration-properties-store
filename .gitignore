@@ -10,6 +10,8 @@ target
 .settings
 .metadata
 .idea
+.vscode
+.factorypath
 .gradle
 *.db
 .DS_Store
