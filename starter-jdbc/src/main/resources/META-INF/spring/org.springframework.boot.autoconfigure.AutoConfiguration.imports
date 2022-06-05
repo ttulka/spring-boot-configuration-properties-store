@@ -1,0 +1,2 @@
+com.ttulka.spring.boot.configstore.jdbc.JdbcConfigurationStoreAutoConfig
+com.ttulka.spring.boot.configstore.jdbc.InitDatabaseStarter

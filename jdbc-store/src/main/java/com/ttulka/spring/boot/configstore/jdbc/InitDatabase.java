@@ -42,6 +42,6 @@ class InitDatabase {
 
     private void createTable(SqlIdentifier tableName) {
         jdbcTemplate.update("CREATE TABLE IF NOT EXISTS " + tableName +
-                " (name VARCHAR(255) PRIMARY KEY, value VARCHAR(255))");
+                " (prop_name VARCHAR(255) PRIMARY KEY, prop_value VARCHAR(255));");
     }
 }

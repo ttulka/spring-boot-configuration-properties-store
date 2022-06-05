@@ -1,6 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.ttulka.spring.boot.configstore.jdbc.JdbcConfigurationStoreAutoConfig,\
-  com.ttulka.spring.boot.configstore.jdbc.InitDatabaseStarter
-
 org.springframework.boot.env.EnvironmentPostProcessor=\
   com.ttulka.spring.boot.configstore.jdbc.JdbcConfigurationStorePostProcessor

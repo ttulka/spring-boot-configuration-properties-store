@@ -24,7 +24,7 @@ public class FindConfigurationProperties {
      */
     public Map<String, Object> all() {
         return jdbcTemplate.queryForList(
-                "SELECT name, value  FROM " + new SqlIdentifier(table)).stream()
-                .collect(toMap(rs -> (String) rs.get("name"), rs -> rs.get("value")));
+                "SELECT prop_name, prop_value  FROM " + new SqlIdentifier(table)).stream()
+                .collect(toMap(rs -> (String) rs.get("prop_name"), rs -> rs.get("prop_value")));
     }
 }

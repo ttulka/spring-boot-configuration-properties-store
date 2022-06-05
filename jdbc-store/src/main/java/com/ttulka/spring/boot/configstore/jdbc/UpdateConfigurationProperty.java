@@ -39,17 +39,17 @@ public class UpdateConfigurationProperty {
     }
 
     private void updateProperty(String name, String value) {
-        jdbcTemplate.update("UPDATE " + new SqlIdentifier(table) + " SET value = ? WHERE name = ?",
+        jdbcTemplate.update("UPDATE " + new SqlIdentifier(table) + " SET prop_value = ? WHERE prop_name = ?",
                 value, name);
     }
 
     private void deleteProperty(String name) {
-        jdbcTemplate.update("DELETE FROM " + new SqlIdentifier(table) + " WHERE name = ?",
+        jdbcTemplate.update("DELETE FROM " + new SqlIdentifier(table) + " WHERE prop_name = ?",
                 name);
     }
 
     private boolean hasProperty(String name) {
-        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM " + new SqlIdentifier(table) + " WHERE name = ?",
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM " + new SqlIdentifier(table) + " WHERE prop_name = ?",
                 Integer.class, name) > 0;
     }
 }
